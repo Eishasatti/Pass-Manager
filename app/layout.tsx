@@ -10,7 +10,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 // app/layout.tsx or app/layout.js
 
 import './globals.css'; 
-import {Toaster} from "react-hot-toast";
+
  
 import Navbar from '@/components/Navbar'
 export default function RootLayout({

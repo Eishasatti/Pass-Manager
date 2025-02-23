@@ -7,6 +7,10 @@ import {
 } from '@clerk/nextjs'
 import './globals.css'
 import { ThemeProvider } from "@/components/theme-provider"
+// app/layout.tsx or app/layout.js
+
+import './globals.css'; 
+import {Toaster} from "react-hot-toast";
  
 import Navbar from '@/components/Navbar'
 export default function RootLayout({
@@ -22,11 +26,13 @@ export default function RootLayout({
          <ThemeProvider
             attribute="class"
             defaultTheme="system"
+            
             enableSystem
+
             disableTransitionOnChange
-          
           >
               <Navbar/>
+     
             {children}
           </ThemeProvider>
         </body>

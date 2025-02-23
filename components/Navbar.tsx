@@ -1,27 +1,26 @@
-"use client"
+"use client";
 
-import { Moon, Sun } from "lucide-react"
-import { useTheme } from "next-themes"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs"
-import Link from "next/link"
-import { useEffect, useState } from "react"
+import dynamic from "next/dynamic";
+import { Moon, Sun } from "lucide-react";
+import { useTheme } from "next-themes";
+import { Button } from "@/components/ui/button";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
-  const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
+
+  const { theme, setTheme } = useTheme();
+
+  if (!mounted) return null;
 
   function toggleTheme() {
-    setTheme(theme === "light" ? "dark" : "light")
-  }
-
-  if (!mounted) {
-    return null
+    setTheme(theme === "light" ? "dark" : "light");
   }
 
   return (
@@ -37,30 +36,21 @@ const Navbar = () => {
                 <Link href="/" className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium">
                   Home
                 </Link>
-                <Link
-                  href="/services"
-                  className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
-                >
+                <Link href="/services" className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium">
                   Services
                 </Link>
-                <Link
-                  href="/about"
-                  className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium"
-                >
+                <Link href="/about" className="text-foreground hover:text-primary px-3 py-2 rounded-md text-sm font-medium">
                   About Us
                 </Link>
               </div>
             </div>
           </div>
           <div className="flex items-center space-x-4">
-           
-                <Button variant="outline" size="icon" onClick={toggleTheme}>
-                  <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                  <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                  <span className="sr-only">Toggle theme</span>
-                </Button>
-             
-  
+            <Button variant="outline" size="icon" onClick={toggleTheme}>
+              <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span className="sr-only">Toggle theme</span>
+            </Button>
 
             <SignedOut>
               <SignInButton mode="modal">
@@ -77,8 +67,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Navbar
-
+export default dynamic(() => Promise.resolve(Navbar), { ssr: false });

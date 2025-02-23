@@ -2,7 +2,12 @@ import AddCard from "@/components/AddCard"
 import AddPassword from "@/components/AddPassword"
 import YourPassword from "@/components/YourPassword"
 import YourCards from "@/components/YourCards"
+import { Metadata } from "next"
 
+export const metadata: Metadata= {
+  title: 'My-Pass-Home',
+  description: 'This is my Password Manager Application',
+}
 export default function Home() {
   return (
     <div className="container mx-auto px-4 py-8">
